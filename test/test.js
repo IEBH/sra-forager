@@ -15,6 +15,8 @@ describe('Forager.populate()', function() {
 			expect(urls).to.be.an.object;
 			expect(urls).to.have.property('doi', 'https://doi.org/10.1016/S0092-8674(00)81683-9');
 			expect(urls).to.have.property('doiDx', 'http://linkinghub.elsevier.com/retrieve/pii/S0092867400816839');
+			expect(urls).to.have.property('google', 'https://google.com?q=10.1016/S0092-8674(00)81683-9');
+			expect(urls).to.have.property('googleScholar', 'https://scholar.google.com/scholar?q=10.1016/S0092-8674(00)81683-9');
 
 			if (settings.wos && settings.wos.user && settings.wos.pass) {
 				expect(urls).to.have.property('wos');

@@ -19,12 +19,13 @@ Supported sources
 -----------------
 Sources can be found in the `./drivers` directory as independent modules.
 
-* **doi** - Simple link to the paper on the DOI.org website (this really just glues the DOI of the paper to the doi.org url)
+* **doi** - Simple link to the paper on the [DOI.org](http://www.doi.org) website (this really just glues the DOI of the paper to the doi.org url)
 * **doiDx** - The resolved URL of the paper
+* **google** - A simple [Google search](https://google.com)
+* **googleScholar** - A simple search using [Google Scholar](https://scholar.google.com)
 * **wos** - Web of Science (requires username / password)
 
 
 TODO
 ====
-* Google Scholar
 * Bond library

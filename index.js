@@ -7,6 +7,8 @@ var foragerDefaults = {
 	drivers: {
 		doi: require('./drivers/doi'),
 		doiDx: require('./drivers/doiDx'),
+		google: require('./drivers/google'),
+		googleScholar: require('./drivers/googleScholar'),
 		wos: require('./drivers/wos'),
 	},
 	wos: { // Put your WoS credentials here if you have any
