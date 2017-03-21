@@ -21,3 +21,10 @@ Sources can be found in the `./drivers` directory as independent modules.
 
 * **doi** - Simple link to the paper on the DOI.org website (this really just glues the DOI of the paper to the doi.org url)
 * **doiDx** - The resolved URL of the paper
+* **wos** - Web of Science (requires username / password)
+
+
+TODO
+====
+* Google Scholar
+* Bond library

@@ -7,12 +7,17 @@ var foragerDefaults = {
 	drivers: {
 		doi: require('./drivers/doi'),
 		doiDx: require('./drivers/doiDx'),
+		wos: require('./drivers/wos'),
+	},
+	wos: { // Put your WoS credentials here if you have any
+		user: '',
+		pass: '',
 	},
 };
 
 function Forager(options) {
 	var forager = {};
-	var settings = _.defaults(options, foragerDefaults);
+	forager.settings = _.defaults(options, foragerDefaults);
 
 	/**
 	* Set an options setting
@@ -21,9 +26,9 @@ function Forager(options) {
 	*/
 	forager.set = argy('object|string [*]', (setting, val) => {
 		if (_.isObject(setting)) {
-			_.merge(setting, settings);
+			_.merge(forager.settings, setting);
 		} else {
-			settings[setting] = val;
+			forager.settings[setting] = val;
 		}
 	});
 
@@ -38,14 +43,22 @@ function Forager(options) {
 	forager.populate = argy('object|string [object] function', (rawRef, options, callback) => {
 		var ref = _.isString(rawRef) ? {doi: rawRef} : rawRef;
 
+		var settings = _.assign(forager.settings, options);
+
 		async()
 			.set('urls', {})
 			.forEach(forager.drivers, function(nextDriver, driver, driverID) {
 				driver.populate(ref, settings, (err, url) => {
 					if (err) {
 						debug('Driver', driverID, 'ERR -', err.toString());
-					} else {
+					} else if (!url) {
+						debug('Driver', driverID, 'recieved empty response');
+					} else if (_.isObject(url)) { // Got multiple urls - merge them
+						_.assign(this.urls, url);
+					} else if (_.isString(url)) {
 						this.urls[driverID] = url;
+					} else {
+						throw new Error('Got URLs back from driver ' + driverID + ' in unknown format: ' + typeof url);
 					}
 					nextDriver();
 				});
@@ -58,7 +71,7 @@ function Forager(options) {
 
 
 	// Initiate drivers
-	forager.drivers = _.mapValues(settings.drivers, (d, id) => new d(forager));
+	forager.drivers = _.mapValues(forager.settings.drivers, (d, id) => new d(forager));
 
 	return forager;
 };
