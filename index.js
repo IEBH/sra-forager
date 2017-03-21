@@ -73,6 +73,26 @@ function Forager(options) {
 	});
 
 
+	/**
+	* Get an object representing all fields that populate() could return
+	* @param {function} callback The callback, which will be fired as (err, object)
+	*/
+	forager.fields = argy('function', function(callback) {
+		async()
+			.set('fields', {})
+			.forEach(forager.drivers, function(nextDriver, driver, driverID) {
+				driver.fields((err, fields) => {
+					if (err) return nextDriver(err);
+					_.assign(this.fields, fields); // Merge with field definitions
+					nextDriver();
+				})
+			})
+			.end(function(err) {
+				callback(err, this.fields);
+			});
+	});
+
+
 	// Initiate drivers
 	forager.drivers = _.mapValues(forager.settings.drivers, (d, id) => new d(forager));
 

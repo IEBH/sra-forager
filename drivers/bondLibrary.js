@@ -4,6 +4,10 @@
 var _ = require('lodash');
 
 module.exports = function(forager) {
+	this.fields = cb => cb(null, ({
+		bondLibrary: 'Search in the Bond University Library',
+	}));
+
 	this.populate = function(ref, settings, cb) {
 		var refText;
 

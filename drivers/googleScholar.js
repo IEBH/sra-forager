@@ -2,6 +2,10 @@
 * Return a search link to Google Scholar
 */
 module.exports = function(forager) {
+	this.fields = cb => cb(null, ({
+		googleScholar: 'Search via Google Scholar',
+	}));
+
 	this.url = 'https://scholar.google.com/scholar?q=';
 	this.populate = function(ref, settings, cb) {
 		if (ref.doi) {

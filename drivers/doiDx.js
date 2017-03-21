@@ -5,6 +5,10 @@ var _ = require('lodash');
 var superagent = require('superagent');
 
 module.exports = function(forager) {
+	this.fields = cb => cb(null, ({
+		doiDx: 'Find the source article link via DOI.org',
+	}));
+
 	this.url = 'http://doi.org/api/handles/';
 
 	this.populate = function(ref, options, callback) {

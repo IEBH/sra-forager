@@ -26,3 +26,13 @@ Sources can be found in the `./drivers` directory as independent modules.
 * **googleScholar** - A simple search using [Google Scholar](https://scholar.google.com)
 * **wos** - Web of Science (requires username / password). This search returns the URL on WoS, a link to related papers and a link to what this paper cites
 
+
+Driver API
+==========
+Each driver must expose at least a `populate` function which, similar to the main module, must accept a reference (which will always be an object, which may have an optional `doi` key), settings (always an object) and a callback.
+
+The async populate function can then return either a string or an object if the population will return multiple keys.
+
+The driver modules can also return a `fields` function which should return a key/value object describing what the returned keys actually are.
+
+See the [drivers directory](./drivers) for examples.

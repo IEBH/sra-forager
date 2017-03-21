@@ -8,6 +8,14 @@ var superagent = require('superagent');
 var xmlParser = require('xml2js');
 
 module.exports = function(forager) {
+	this.fields = cb => {
+		cb(null, forager.settings.wos && forager.settings.wos.user && forager.settings.wos.pass ? {
+			wos: 'Search via Web of Science',
+			wosRelated: 'Search for related papers with Web of Science',
+			wosCiting: 'Search for cited-by with Web of Science',
+		} : null)
+	};
+
 	this.url = 'https://ws.isiknowledge.com/cps/xrpc';
 
 	this.populate = function(ref, settings, callback) {

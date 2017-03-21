@@ -2,6 +2,10 @@
 * Return a search link to Google
 */
 module.exports = function(forager) {
+	this.fields = cb => cb(null, ({
+		google: 'Search via Google.com',
+	}));
+
 	this.url = 'https://google.com?q=';
 	this.populate = function(ref, settings, cb) {
 		if (ref.doi) {
