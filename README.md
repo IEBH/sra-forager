@@ -27,6 +27,35 @@ Sources can be found in the `./drivers` directory as independent modules.
 * **wos** - Web of Science (requires username / password). This search returns the URL on WoS, a link to related papers and a link to what this paper cites
 
 
+API
+===
+
+forager.populate
+----------------
+
+	forger.populate(reference, [options], callback)
+
+Provide a list of URLs to access the given reference. If the reference is provided as a string it will be assumed to be a DOI otherwise it must be provided as a [RefLib compatible citation](https://github.com/hash-bang/Reflib).
+
+
+forager.fields
+--------------
+
+	forager.fields(callback)
+
+Calculate the fields that forager would return as an object.
+
+
+forager.set
+-----------
+
+	forager.set(options Object)
+	forager.set(key, value)
+
+Set one or more options relative to the forager instance.
+If specified as a key this can be in dotted notation or as an array of branches.
+
+
 Driver API
 ==========
 Each driver must expose at least a `populate` function which, similar to the main module, must accept a reference (which will always be an object, which may have an optional `doi` key), settings (always an object) and a callback.
