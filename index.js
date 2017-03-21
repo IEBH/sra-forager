@@ -5,6 +5,7 @@ var debug = require('debug')('forager');
 
 var foragerDefaults = {
 	drivers: {
+		bondLibrary: require('./drivers/bondLibrary'),
 		doi: require('./drivers/doi'),
 		doiDx: require('./drivers/doiDx'),
 		google: require('./drivers/google'),

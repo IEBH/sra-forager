@@ -13,6 +13,7 @@ describe('Forager.populate()', function() {
 		forager.populate('10.1016/S0092-8674(00)81683-9', function(err, urls) {
 			expect(err).to.not.be.ok;
 			expect(urls).to.be.an.object;
+			expect(urls).to.have.property('bondLibrary');
 			expect(urls).to.have.property('doi', 'https://doi.org/10.1016/S0092-8674(00)81683-9');
 			expect(urls).to.have.property('doiDx', 'http://linkinghub.elsevier.com/retrieve/pii/S0092867400816839');
 			expect(urls).to.have.property('google', 'https://google.com?q=10.1016/S0092-8674(00)81683-9');
