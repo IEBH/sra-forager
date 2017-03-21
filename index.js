@@ -24,14 +24,14 @@ function Forager(options) {
 
 	/**
 	* Set an options setting
-	* @param {string|Object} setting Either the key to set or an entire object when setting multiple
+	* @param {string|array|Object} setting Either the key to set or an entire object when setting multiple
 	* @param {*} [val] The value if setting is a string / single setting to set
 	*/
-	forager.set = argy('object|string [*]', (setting, val) => {
+	forager.set = argy('object|string|array [*]', (setting, val) => {
 		if (_.isObject(setting)) {
 			_.merge(forager.settings, setting);
 		} else {
-			forager.settings[setting] = val;
+			_.set(forager.settings setting, val);
 		}
 	});
 
