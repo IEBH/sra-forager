@@ -14,7 +14,7 @@ const scenario = async () => {
       {
         database: 'scopus',
         config: {
-          apiKey: '95b32c5ac320f88318b3af2c5c862357',
+          apiKey: '',
         }
       }
     ]

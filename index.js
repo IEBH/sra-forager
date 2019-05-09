@@ -15,6 +15,14 @@ const driversByDatabase = {
  * @returns {Promise<Object[]>}
  */
 const forageCitations = async (citations, options) => {
+  if (!options.drivers || options.drivers.length === 0) {
+    throw new Error('At least driver must be specified.');
+  } 
+
+  if (!options.drivers.every(driver => Object.keys(driversByDatabase).includes(driver.database))) {
+    throw new Error('Please provide a valid driver.');
+  }
+  
   const selectedDrivers = options.drivers.map(driver => driversByDatabase[driver.database](driver.config));
 
   console.log(`Started foraging ${citations.length} citations`);

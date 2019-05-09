@@ -18,6 +18,10 @@ const europepmcToSraFields = {
   authorString: 'authors',
 }
 
+/**
+ * A databases query fields don't always match its citation fields. This map translates
+ * sra fields to the relevant query field, but not the database's citation field.
+ */
 const sraToEuropepmcQueryFields = {
   pmid: 'ext_id',
   doi: 'doi',
@@ -66,6 +70,11 @@ const EuropepmcDriver = () => {
     baseURL: BASE_URL,
   })
 
+  /**
+   * Searches scopus, abstracting the extraction of citations from the api response.
+   * @param {Object} query
+   * @returns {Object[]}
+   */
   const search = async ({ query }) => {
     const response = await client.get('/search', {
       params: {
@@ -83,6 +92,12 @@ const EuropepmcDriver = () => {
     return europepmcCitations;
   }
 
+  /**
+   * Forages a citation by querying scopus with fields in a priority order of
+   * specificity.
+   * @param {Object} citation
+   * @returns {Object} foragedCitation
+   */
   const forageCitation = async (citation) => {
     const sraFieldsToQueryInPriorityOrder = ['pmid', 'doi', 'title'];
 
