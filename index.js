@@ -22,14 +22,19 @@ const forageCitations = async (citations, options) => {
   if (!options.drivers.every(driver => Object.keys(driversByDatabase).includes(driver.database))) {
     throw new Error('Please provide a valid driver.');
   }
-  
+
   const selectedDrivers = options.drivers.map(driver => driversByDatabase[driver.database](driver.config));
 
   console.log(`Started foraging ${citations.length} citations`);
 
   const foragedCitations = await Promise.all(citations.map(async (citation, index) => {
-    /* Simple throttle to delay execution a 1 second multipled by the current index. */
-    await new Promise((resolve) => {
+    /* 
+    * Delays execution for each citation by its index multiplied by a constant number of ms. This allows spidering per citation 
+    * to occur asynchronously but with a sequential offset. 
+    * 
+    * This is kinder to the databases and avoids rate limiting issues.
+    * */    
+   await new Promise((resolve) => {
       setTimeout(resolve, index * 1000);
     })
 
