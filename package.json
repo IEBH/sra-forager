@@ -1,10 +1,10 @@
 {
   "name": "sra-forager",
-  "version": "0.0.0",
-  "description": "CREBP-SRA tool to return multiple source URLs from a academic citation",
+  "version": "0.1.0",
+  "description": "CREBP-SRA tool to aggregate citations fields from multiple sources.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout=10000 './tests/*/**.test.js'"
   },
   "repository": {
     "type": "git",
@@ -24,15 +24,10 @@
   },
   "homepage": "https://github.com/CREBP/sra-forager#readme",
   "dependencies": {
-    "argy": "^1.3.1",
-    "async-chainable": "^2.3.1",
-    "debug": "^2.6.3",
-    "lodash": "^4.17.4",
-    "superagent": "^3.5.1",
-    "xml2js": "^0.4.17"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
   }
 }

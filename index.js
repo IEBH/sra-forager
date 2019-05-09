@@ -1,5 +1,7 @@
-const driversByDatabase = {
+const EuropepmcDriver = require('./drivers/europepmc');
 
+const driversByDatabase = {
+  europepmc: EuropepmcDriver,
 }
 
 /**
@@ -15,23 +17,23 @@ const forageCitations = async (citations, options) => {
 
   console.log(`Started foraging ${citations.length} citations`);
 
-  const aggregatedCitations = await Promise.all(citations.map(async citation => {
-    const aggregatedCitationByDriver = {};
+  const foragedCitations = await Promise.all(citations.map(async citation => {
+    const foragedCitationByDriver = {};
 
     await Promise.all(selectedDrivers.map(async driver => {
       try {
-        aggregatedCitationByDriver[driver.database] = await driver.forageCitation(citation, options);
+        foragedCitationByDriver[driver.database] = await driver.forageCitation(citation);
       } catch (error) {
         console.log(`${driver.database}: Something went wrong.`);
       }
     }))
 
-    return Object.values(aggregatedCitationByDriver).reduce((a, b) => ({ ...a, ...b }));
+    return Object.values(foragedCitationByDriver).reduce((a, b) => ({ ...a, ...b }), {});
   }));
 
   console.log(`Finished foraging`);
 
-  return aggregatedCitations;
+  return foragedCitations;
 }
 
 const forager = {
