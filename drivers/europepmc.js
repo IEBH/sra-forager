@@ -98,11 +98,15 @@ const EuropepmcDriver = () => {
       }
   
       if (europepmcCitations.length !== 1) continue;
+
+      console.log(`Database ${database}: Successful forage.`);
   
       const parsedSraCitation = parseEuropepmcCitationToSra(europepmcCitations[0]);
 
       return { ...citation, ...parsedSraCitation };
     }
+
+    console.log(`Database ${database}: Could not find anything.`)
 
     return citation;
   }
