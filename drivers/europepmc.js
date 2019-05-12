@@ -1,5 +1,9 @@
 const axios = require('axios');
 
+/**
+ * Europepmc api documentation can be found at https://europepmc.org/RestfulWebService
+ */
+
 const BASE_URL = 'https://www.ebi.ac.uk/europepmc/webservices/rest';
 
 const europepmcToSraFields = {
@@ -72,6 +76,7 @@ const EuropepmcDriver = () => {
 
   /**
    * Searches scopus, abstracting the extraction of citations from the api response.
+   * https://europepmc.org/RestfulWebService#!/Europe32PMC32Articles32RESTful32API/search
    * @param {Object} query
    * @returns {Object[]}
    */

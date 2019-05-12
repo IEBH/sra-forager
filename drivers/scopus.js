@@ -1,5 +1,9 @@
 const axios = require('axios');
 
+/**
+ * Scopus api documentation can found at https://dev.elsevier.com/documentation/ScopusSearchAPI.wadl
+ */
+
 const BASE_URL = 'https://api.elsevier.com/content';
 
 const scopusToSraFields = {
@@ -72,6 +76,7 @@ const ScopusDriver = (config) => {
 
   /**
    * Searches scopus, abstracting the extraction of citations from the api response.
+   * https://dev.elsevier.com/documentation/ScopusSearchAPI.wadl
    * @param {Object} query
    * @returns {Object[]}
    */
